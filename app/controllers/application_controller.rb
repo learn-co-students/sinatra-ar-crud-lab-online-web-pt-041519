@@ -6,8 +6,9 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  # index is /articles
   get '/' do
-    erb :index
+    redirect to '/articles'
   end
 
   ### Create
@@ -18,10 +19,8 @@ class ApplicationController < Sinatra::Base
 
   # Create instance
   post '/articles' do
-    @article = Article.create(title: params[:title], content: params[:content])
-    @article.save
-
-    redirect "/articles/#{@article.id}"
+    @article = Article.create(params)
+    redirect to "/articles/#{@article.id}"
   end
 
   
@@ -29,14 +28,12 @@ class ApplicationController < Sinatra::Base
   # All
   get '/articles' do
     @articles = Article.all
-
     erb :index
   end
 
   # Instance
   get '/articles/:id' do
     @article = Article.find(params[:id])
-
     erb :show
   end
 
@@ -45,14 +42,14 @@ class ApplicationController < Sinatra::Base
   # Edit form
   get '/articles/:id/edit' do
     @article = Article.find(params[:id])
-
     erb :edit
   end
 
   # Update instance
   patch '/articles/:id' do
     @article = Article.find(params[:id])
-    @article.update(title: params[:title], content: params[:content])
+    # @article.update(title: params[:title], content: params[:content])
+    @article.update(params[:article])
     @article.save
 
     # Send new indicator to show
@@ -64,10 +61,8 @@ class ApplicationController < Sinatra::Base
 
   ### Delete
   delete '/articles/:id/delete' do
-    article = Article.find(params[:id])
-    article.destroy
-
-    redirect '/articles'
+    Article.destroy(params[:id])
+    redirect to '/articles'
   end
 
 end
