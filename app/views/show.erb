@@ -1,0 +1,17 @@
+<h1>Article View</h1>
+
+<% if @new %>
+<em>Newly updated!</em><br>
+<% end %>
+<h2>Title: <%= @article.title %></h2>
+
+<h3>Content:</h3>
+<p><%= @article.content %></p>
+
+<form method="POST" action="/articles/<%= @article.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+</form>
+
+<hr>
+<p><a href="/articles">All articles</a></p>
