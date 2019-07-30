@@ -1,0 +1,8 @@
+<h1>Here's a List of All Articles:</h1>
+
+
+<ul><% @articles.each_with_index do |article, index| %>
+<%= index + 1 %>. <%= article.title %><br>
+<% end %>
+<br><br>
+<a href='/articles/new'>Create an Article</a>
