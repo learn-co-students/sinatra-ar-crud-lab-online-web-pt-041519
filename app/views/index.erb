@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Articles</title>
+  </head>
+  <body>
+    <form method="post" action="/articles">
+      <% @articles.each do |article| %>
+        <p>
+          <h1><%= article.title %></h1><br>
+          <%= article.content %>
+        </p>
+      <% end %>
+    </form>
+  </body>
+</html>
