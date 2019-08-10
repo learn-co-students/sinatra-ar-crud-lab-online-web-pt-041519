@@ -1,0 +1,16 @@
+<% if @articles %>
+<h1>All Articles</h1>
+<ul>
+<% @articles.each do |article| %>
+  <li><%= article.title %><br> <%= article.content %><br>
+  <a href="/articles/<%= article.id %>">view</a></li>
+<% end %>
+</ul>
+<hr>
+<% else %>
+  <h1>Welcome!</h1>
+  <p><a href="/articles">See all articles</a></p>
+<% end %>
+<p><a href="/articles/new">Make new article</a></p>
+
+
